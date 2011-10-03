@@ -1,9 +1,4 @@
 
-local BACKDROP = {
-    bgFile = [=[Interface\ChatFrame\ChatFrameBackground]=],
-    insets = {top = -1, bottom = -1, left = -1, right = -1}
-}
-
 local HOUR = 3600
 local TEN = 60*10
 local MIN = 60
@@ -120,9 +115,6 @@ local PostCreate = function(self)
     self:SetScript('OnHide', OnHide)
 
     self.__parent = self:GetParent()
-
-    self:SetBackdrop(BACKDROP)
-    self:SetBackdropColor(0,0,0, .5)
 
     UpdateAura(self, self:GetID())
 end
