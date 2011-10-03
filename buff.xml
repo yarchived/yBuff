@@ -1,0 +1,31 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+    ..\FrameXML\UI.xsd">
+    <Button name='yBuffAuraTemplate' inherits='SecureActionButtonTemplate' virtual='true'>
+        <Scripts>
+            <OnEnter>
+                GameTooltip:SetOwner(self, 'ANCHOR_BOTTOMLEFT')
+
+                local button = self:GetParent()
+                local slot_target = button:GetAttribute'target-slot'
+                local unit = button:GetAttribute'unit'
+                if(slot_target) then
+                    GameTooltip:SetInventoryItem(unit, self:GetID())
+                else
+                    GameTooltip:SetUnitAura(unit, self:GetID(), 'HELPFUL')
+                end
+            </OnEnter>
+            <OnLeave>
+                GameTooltip:Hide()
+            </OnLeave>
+            <OnLoad>
+                self:RegisterForClicks'RightButtonUp'
+                self:SetSize(28, 28)
+            </OnLoad>
+        </Scripts>
+    </Button>
+    <Button name='yBuffCancelableAuraTemplate' inherits='yBuffAuraTemplate' virtual='true'>
+        <Attributes>
+            <Attribute name='type' value='cancelaura' />
+        </Attributes>
+    </Button>
+</Ui>
